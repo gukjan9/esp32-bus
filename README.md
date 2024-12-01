@@ -6,7 +6,9 @@
 | Micro-Controller | Module | Environment
 | --- | --- | --- 
 | WEMOS LOLIN D32 (ESP32) | FUTABA VFD Module (8MD06INKM) | Micropython
-</br>
+
+<br>
+
 # Connection
 | VFD | LOLIN D32
 | --- | ---
