@@ -19,3 +19,9 @@
 | MOSI | GPIO23
 | VCC | 3.3V
 | GND | GND
+
+<br>
+
+### References
+https://github.com/zhcong/8MD06INKM-for-micropython?tab=readme-ov-file </br>
+https://github.com/Reboot93/MicroPython-8MD-06INKM-display-driver
