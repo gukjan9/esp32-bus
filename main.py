@@ -1,6 +1,9 @@
 from machine import SPI, Pin
 from _8MD06INKM import _8MD06INKM
 import time
+import wifi
+
+wifi.connect()
 
 rest_pin = Pin(5, Pin.OUT)
 cs_pin = Pin(26, Pin.OUT)
