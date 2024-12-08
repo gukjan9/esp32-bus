@@ -1,9 +1,13 @@
 from machine import SPI, Pin
 from _8MD06INKM import _8MD06INKM
-import time
-import wifi
+import time, json
+import wifi, bus
 
-wifi.connect()
+with open('config.json', 'r') as e:
+        config = json.load(e)
+
+wifi.connect(config['ssid'], config['password'])
+bus.get_data(config['api_key'], config['ID_9030'])
 
 rest_pin = Pin(5, Pin.OUT)
 cs_pin = Pin(26, Pin.OUT)

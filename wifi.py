@@ -1,12 +1,8 @@
 import network
-import json
 
-def connect():
-    with open('config.json', 'r') as e:
-        config = json.load(e)
-
-    ssid = config['ssid']
-    password = config['password']
+def connect(ssid, pw):
+    ssid = ssid
+    password = pw
 
     wlan = network.WLAN(network.STA_IF)
     if not wlan.isconnected():
