@@ -11,4 +11,4 @@ def connect(ssid, pw):
         while not wlan.isconnected():
             pass
 
-    print('와이파이:', wlan.ifconfig())
+    print('Wifi:', wlan.ifconfig())
