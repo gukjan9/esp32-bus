@@ -13,6 +13,11 @@ def parse_xml(xml):
     tag = None
     value = None
     elements = []
+    
+    route_departure_seq = {
+        '229000097': 21,
+        '229000112': 8
+    }
 
     in_tag = False
     for char in xml:
@@ -33,13 +38,22 @@ def parse_xml(xml):
     if value and tag:
         elements.append((tag, value.strip()))
 
+    closest_seq = None
     query_time = None
-    first_station_id = None
+    route_id = None
+    station_seq = None
+
     for tag, val in elements:
         if tag == "queryTime":
             query_time = val
-        elif tag == "stationId" and first_station_id is None:
-            first_station_id = val
-            break
-
-    return query_time, first_station_id
+        elif tag == "routeId":
+            route_id = val
+        elif tag == "stationSeq":
+            station_seq = int(val)
+            if route_id in route_departure_seq:
+                departure_seq = route_departure_seq[route_id]
+                diff = departure_seq - station_seq
+                if 0 <= diff <= departure_seq:
+                    return query_time, diff
+        else:
+            return query_time, -1

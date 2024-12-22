@@ -24,25 +24,22 @@ rst = Pin(5, Pin.OUT)
 cs = Pin(26, Pin.OUT)
 display = futaba_8md06inkm.VFD(hspi, rst, cs, en)
 
-def where_is_bus(stationId, route, departure):
-    if stationId not in route:
+def where_is_bus(stationSeq):
+    if stationSeq < 0:
         return 'None'
     
-    if stationId == departure:
+    if stationSeq == 0:
         return ' Arr'
     
-    current_index = route.index(stationId)
-    departure_index = route.index(departure)
-    difference = departure_index - current_index
-    
-    return ' '+ str(difference) + 's'
+    else:
+        return ' ' + stationSeq + 's'
 
 def display_route(route_name, route):
-    queryTime, stationId = bus.parse_xml(bus.get_data(config['api_key'], config[f'ID_{route_name}']))
-    print(f"Query Time: {queryTime}, First Station ID: {stationId}")
+    queryTime, stationSeq = bus.parse_xml(bus.get_data(config['api_key'], config[f'ID_{route_name}']))
+    print(f"Query Time: {queryTime}, Station Seq: {stationSeq}")
 
     queryTime = queryTime[11:19]
-    now = where_is_bus(stationId, route, departure)
+    now = where_is_bus(stationSeq)
     print(now)
 
     display.fill(0)
@@ -55,4 +52,6 @@ def display_route(route_name, route):
 
 while True:
     display_route('9030', R9030)
+    time.sleep(10)
     display_route('7625', R7625)
+    time.sleep(10)
