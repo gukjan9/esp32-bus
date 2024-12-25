@@ -32,7 +32,8 @@ def where_is_bus(stationSeq):
         return ' Arr'
     
     else:
-        return ' ' + stationSeq + 's'
+        if(stationSeq >= 10): return ' ' + str(stationSeq) + 's'
+        else: return '  ' + str(stationSeq) + 's'
 
 def display_route(route_name, route):
     queryTime, stationSeq = bus.parse_xml(bus.get_data(config['api_key'], config[f'ID_{route_name}']))

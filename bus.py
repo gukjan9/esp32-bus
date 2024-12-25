@@ -46,14 +46,17 @@ def parse_xml(xml):
     for tag, val in elements:
         if tag == "queryTime":
             query_time = val
-        elif tag == "routeId":
+            print("query " + query_time)
+        if tag == "routeId":
             route_id = val
-        elif tag == "stationSeq":
-            station_seq = int(val)
+            print("route_id " + route_id)
+        if tag == "stationSeq":
+            station_seq = val
+            print("station_seq" + station_seq)
             if route_id in route_departure_seq:
                 departure_seq = route_departure_seq[route_id]
-                diff = departure_seq - station_seq
+                diff = int(departure_seq) - int(station_seq)
                 if 0 <= diff <= departure_seq:
                     return query_time, diff
-        else:
-            return query_time, -1
+    
+    return query_time, -1
